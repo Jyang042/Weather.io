@@ -4,6 +4,7 @@ import { Card, CardContent, Typography, CardActions, Button } from '@mui/materia
 import WbSunnyIcon from '@mui/icons-material/WbSunny';
 import CloudIcon from '@mui/icons-material/Cloud';
 import AcUnitIcon from '@mui/icons-material/AcUnit';
+import useStyles from '../assets/styles'; // Correct import path
 
 const getWeatherIcon = (condition) => {
   switch (condition) {
@@ -19,6 +20,8 @@ const getWeatherIcon = (condition) => {
 };
 
 const WeatherCard = ({ location, temperature, condition, low, high }) => {
+  const classes = useStyles();
+
   return (
     <Card style={{ minWidth: 275, margin: '10px' }}>
       <CardContent>
