@@ -1,5 +1,6 @@
 // src/components/WeatherCard.js
 import React from 'react';
+import { useState } from 'react';
 import { Card, CardContent, Typography, CardActions, Button } from '@mui/material';
 import WbSunnyIcon from '@mui/icons-material/WbSunny';
 import CloudIcon from '@mui/icons-material/Cloud';
@@ -18,26 +19,33 @@ const getWeatherIcon = (condition) => {
   }
 };
 
-const WeatherCard = ({ location, temperature, condition, low, high }) => {
+const WeatherCard = ({ location, temperature, condition, low, high, detailedView, onMoreInfoClick }) => {
+  const handleMoreInfoClick = () => {
+    //Call and Pass the Cards info to the detailed view
+    onMoreInfoClick({ location, temperature, condition, low, high});
+  };
+
   return (
-    <Card style={{ minWidth: 275, margin: '10px' }}>
+    <Card style={{ minWidth: 275, margin: '10px', marginBottom: detailedView ? '50px' : '10px' }}>
       <CardContent>
         <Typography variant="h5" component="div">
           {location}
         </Typography>
-        <Typography variant="h3" component="div">
+        <Typography variant={detailedView ? "h2" : "h3"} component="div">
           {temperature}°C
         </Typography>
-        <Typography variant="h6" component="div">
+        <Typography variant={detailedView ? "h4" : "h6"} component="div">
           {getWeatherIcon(condition)} {condition}
         </Typography>
         <Typography color="textSecondary">
           Low: {low}°C | High: {high}°C
         </Typography>
       </CardContent>
-      <CardActions>
-        <Button size="small">More Info</Button>
-      </CardActions>
+      {!detailedView && (
+        <CardActions>
+          <Button size="small" onMoreInfoClick={handleMoreInfoClick}>More Info</Button>
+        </CardActions>
+      )}
     </Card>
   );
 };

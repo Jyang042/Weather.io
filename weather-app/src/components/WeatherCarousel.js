@@ -12,7 +12,7 @@ const weatherData = [
   // Add more weather data here...
 ];
 
-const WeatherCarousel = () => {
+const WeatherCarousel = ({ onCardClick }) => {
   const settings = {
     dots: true,
     infinite: true,
@@ -21,10 +21,20 @@ const WeatherCarousel = () => {
     slidesToScroll: 1
   };
 
+  const handleCardClick = (index) => {
+    if (onCardClick) {
+      onCardClick(index);
+    }
+  };
+
   return (
     <Slider {...settings}>
       {weatherData.map((weather, index) => (
-        <WeatherCard key={index} {...weather} />
+        <WeatherCard 
+          key={index} 
+          {...weather} 
+          onClick={() => handleCardClick(index)} // Pass index to handleCardClick
+        />
       ))}
     </Slider>
   );
