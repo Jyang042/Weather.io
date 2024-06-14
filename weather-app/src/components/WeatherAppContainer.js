@@ -2,10 +2,9 @@
 import React, { useState, useEffect } from 'react';
 import Header from './Header';
 import DetailedWeatherCard from './DetailedWeatherCard';
-import HourlyForecast from './HourlyForecast';
-import DailyForecastCard from './DailyForecastCard';
 import { fetchWeatherData } from './WeatherService';
 import WeatherCarousel from './WeatherCarousel';
+import { Container } from '@mui/material';
 
 const WeatherAppContainer = () => {
   const [weatherData, setWeatherData] = useState(null);
@@ -24,11 +23,9 @@ const WeatherAppContainer = () => {
   const { current, hourly, daily } = weatherData;
 
   return (
-    <div>
-      <Header />
-      <DetailedWeatherCard />
-      <WeatherCarousel />
-    </div>
+    <Container>
+      
+    </Container>
   );
 };
 

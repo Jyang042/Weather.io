@@ -5,6 +5,8 @@ import { Card, CardContent, Typography, CardActions, Button } from '@mui/materia
 import WbSunnyIcon from '@mui/icons-material/WbSunny';
 import CloudIcon from '@mui/icons-material/Cloud';
 import AcUnitIcon from '@mui/icons-material/AcUnit';
+import DetailedWeatherCard from './DetailedWeatherCard';
+import '../assets/styling/WeatherCard.css';
 
 const getWeatherIcon = (condition) => {
   switch (condition) {
@@ -19,34 +21,33 @@ const getWeatherIcon = (condition) => {
   }
 };
 
-const WeatherCard = ({ location, temperature, condition, low, high, detailedView, onMoreInfoClick }) => {
+const WeatherCard = ({ day, high, low, condition, onClick }) => {
   const handleMoreInfoClick = () => {
     //Call and Pass the Cards info to the detailed view
-    onMoreInfoClick({ location, temperature, condition, low, high});
+    onClick({ day, high, low, condition});
   };
 
   return (
-    <Card style={{ minWidth: 275, margin: '10px', marginBottom: detailedView ? '50px' : '10px' }}>
+    <div className="card">
+    
       <CardContent>
-        <Typography variant="h5" component="div">
-          {location}
+        <Typography variant="h4" component="div">
+          {day}
         </Typography>
-        <Typography variant={detailedView ? "h2" : "h3"} component="div">
-          {temperature}°C
-        </Typography>
-        <Typography variant={detailedView ? "h4" : "h6"} component="div">
+        <Typography variant={DetailedWeatherCard ? "h4" : "h6"} component="div">
           {getWeatherIcon(condition)} {condition}
         </Typography>
         <Typography color="textSecondary">
-          Low: {low}°C | High: {high}°C
+          Low: {low}°F | High: {high}°F
         </Typography>
       </CardContent>
-      {!detailedView && (
+      {!DetailedWeatherCard && (
         <CardActions>
           <Button size="small" onMoreInfoClick={handleMoreInfoClick}>More Info</Button>
         </CardActions>
       )}
-    </Card>
+    
+    </div>
   );
 };
 
